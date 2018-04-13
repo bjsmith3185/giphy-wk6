@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Movies</title>
+  
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Giphy Search</h1>
+
+    <!-- Movies will Get Dumped Dere -->
+    <div id="giphy-view"></div>
+
+    <!-- Rendered Buttons will get Dumped Here  -->
+    <div id="buttons-view"></div>
+
+    <form id="giphy-form">
+      <label for="giphy-input">Add a Search Bro</label>
+      <input type="text" id="giphy-input">
+      <br>
+
+      <!-- Button triggers new movie to be added -->
+      <input id="add-giphy" type="submit" value="Add a Search Bro">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // Initial array of movies
+  //    var giphys = ["dog", "cat", "duck", "bird"];
+
+      // displayMovieInfo function re-renders the HTML to display the appropriate content
+      function displayGiphyInfo() {
+
+        var search = $(this).attr("data-name");
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=dogs&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5"
+
+        //var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5";
+
+        // Creating an AJAX call for the specific movie button being clicked
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+            console.log(response);
+
+  
+        });
+
+      }
+displayGiphyInfo();
+   
+    </script>
+  </div>
+</body>
+
+</html>

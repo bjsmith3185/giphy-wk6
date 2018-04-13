@@ -11,6 +11,10 @@
     input {
       margin: 10px;
     }
+
+    p {
+        margin-left: 60px;
+    }
   </style>
 </head>
 
@@ -26,7 +30,7 @@
     <div id="buttons-view"></div>
 
     <form id="giphy-form">
-      <label for="giphy-input">Add a Search Bro</label>
+      <label for="giphy-input">Search for Animals</label>
       <input type="text" id="giphy-input">
       <br>
 
@@ -61,7 +65,7 @@
           console.log("this is the giphy video link: " + gipURL);
 
           // Creating an element to hold the video
-          var gip = $("<video>").attr("src", gipURL);
+          var gip = $("<iframe>").attr("src", gipURL).attr("frameBorder", 0);
 
           // Appending the video
           giphyDiv.append(gip);
@@ -74,7 +78,7 @@
           var rating = response.data[0].rating;
 
           // Creating an element to have the rating displayed
-          var pRating = $("<p>").text("Rating: " + rating);
+          var pRating = $("<p>").text("This " + search + " has a (" + rating + ") rating");
 
           // Displaying the rating
           giphyDiv.append(pRating);

@@ -5,7 +5,7 @@
  function displayGiphyInfo() {
 
    var search = $(this).attr("data-name");
-   var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5";
+   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5";
 
 
    // make a for loop to display 5 result searches each time the button is clicked.

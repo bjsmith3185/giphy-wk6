@@ -12,14 +12,21 @@
       margin: 10px;
     }
 
+    h1 {
+        text-align: center;
+    }
+
     p {
-        margin-left: 60px;
+        margin: 5px 0 30px 60px;
     }
 
     body {
         background: lightblue;
     }
 
+    #giphy-view {
+        float: left;
+    }
 
   </style>
 </head>
@@ -29,7 +36,7 @@
   <div class="container">
     <h1>Giphy Search</h1>
 
-    <!-- Movies will Get Dumped Dere -->
+    <!-- results will Get Dumped Dere -->
     <div id="giphy-view"></div>
 
     <!-- Rendered Buttons will get Dumped Here  -->
@@ -56,7 +63,8 @@
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5";
 
 
-
+        // make a for loop to display 5 result searches each time the button is clicked.
+        for (var j = 0; j < 5; j++) {
 
 
 
@@ -70,7 +78,7 @@
           // Creating a div to hold the results
          var giphyDiv = $("<div class='giphy'>");
             // generate a random number to apply to the array index
-        var randomIndex = Math.floor((Math.random() * 6));
+        var randomIndex = Math.floor((Math.random() * 5));
           // Retrieving the URL for the video
           var gipURL = response.data[randomIndex].embed_url;
           console.log("this is the giphy video link: " + gipURL);
@@ -94,8 +102,11 @@
           // Displaying the rating
           giphyDiv.append(pRating);
 
+        // end of ajax function
         });
-
+        // end of for loop
+        }
+        // end of displayGiphyInfo function
       }
 
       // Function for displaying giphy search

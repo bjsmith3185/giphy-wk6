@@ -5,11 +5,11 @@
  function displayGiphyInfo() {
 
    var search = $(this).attr("data-name");
-   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5";
+   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=10";
 
 
-   // make a for loop to display 5 result searches each time the button is clicked.
-   for (var j = 0; j < 5; j++) {
+   // make a for loop to display 10 result searches each time the button is clicked.
+   for (var j = 0; j < 10; j++) {
 
 
 
@@ -22,10 +22,17 @@
 
      // Creating a div to hold the results
     var giphyDiv = $("<div class='giphy'>");
+//-------------------------------------------------------------------
+    // adding data-state for the pause/start function
+    giphyDiv.attr("data-state", "still");
+
+
+//-------------------------------------------------------------------
        // generate a random number to apply to the array index
-   var randomIndex = Math.floor((Math.random() * 5));
+   var randomIndex = Math.floor((Math.random() * 10));
      // Retrieving the URL for the video
-     var gipURL = response.data[randomIndex].embed_url;
+//var gipURL = response.data[randomIndex].embed_url;
+    var gipURL = response.data[randomIndex].images.fixed_height_still.url;
      console.log("this is the giphy video link: " + gipURL);
 
      // Creating an element to hold the video
@@ -33,7 +40,17 @@
 
      // Appending the video
      giphyDiv.append(gip);
+//----------------------------------------------------------------------------
 
+    var still = response.data[randomIndex].images.fixed_height_still.url;
+    console.log("this is the still img: " + still);
+    giphyDiv.attr("data-still", still);
+
+    // adding the data-animate
+    var dataAnimate = response.data[randomIndex].images.fixed_width.url;
+    giphyDiv.attr("data-animate", dataAnimate);
+
+//-----------------------------------------------------------------------------
      // Putting the entire search above the previous searches
      $("#giphy-view").prepend(giphyDiv);
 
@@ -46,6 +63,9 @@
 
      // Displaying the rating
      giphyDiv.append(pRating);
+
+     
+
 
    // end of ajax function
    });
@@ -96,3 +116,24 @@
 
  // Calling the renderButtons function to display the intial buttons
  renderButtons();
+
+ //-----------------------------------------------
+
+
+  $(".giphy").on("click",  function() {
+
+   var state = $(this).attr('data-state');
+
+   if(state === "still") {
+     var animate = $(this).attr("data-animate");
+     $(this).attr("src", animate);
+     $(this).attr("data-state", "animate");
+   }
+  
+   if(state === "animate") {
+     var animate2 = $(this).attr("data-still");
+     $(this).attr("src", animate2);
+     $(this).attr("data-state", "still");
+   }
+
+ });

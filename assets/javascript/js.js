@@ -1,5 +1,5 @@
  // Initial array of movies
- var giphys = ["dog", "cat", "duck", "bird"];
+ var giphys = ["dog", "cat", "cow", "bird"];
 
  // displayGiphyInfo function re-renders the HTML to display the appropriate content
  function displayGiphyInfo() {
@@ -9,7 +9,7 @@
 
 
    // make a for loop to display 10 result searches each time the button is clicked.
-   for (var j = 0; j < 10; j++) {
+   
 
 
 
@@ -19,7 +19,7 @@
      method: "GET"
    }).then(function(response) {
        console.log("this is the search response: " + response);
-
+       for (var j = 0; j < 10; j++) {
      // Creating a div to hold the results
     var giphyDiv = $("<div class='giphy'>");
 //-------------------------------------------------------------------
@@ -29,25 +29,28 @@
 
 //-------------------------------------------------------------------
        // generate a random number to apply to the array index
-   var randomIndex = Math.floor((Math.random() * 10));
+   //var randomIndex = Math.floor((Math.random() * 10));
      // Retrieving the URL for the video
 //var gipURL = response.data[randomIndex].embed_url;
-    var gipURL = response.data[randomIndex].images.fixed_height_still.url;
-     console.log("this is the giphy video link: " + gipURL);
+    var gipURL = response.data[j].images.fixed_height_still.url;
+     console.log("this is the src link: " + gipURL);
 
      // Creating an element to hold the video
-     var gip = $("<iframe>").attr("src", gipURL).attr("frameBorder", 0);
+ //    var gip = $("<video>").attr("src", gipURL)//.attr("frameBorder", 0);
+
+     var gip = $("<img>").attr("src", gipURL)//.attr("frameBorder", 0);
 
      // Appending the video
      giphyDiv.append(gip);
 //----------------------------------------------------------------------------
 
-    var still = response.data[randomIndex].images.fixed_height_still.url;
+    var still = response.data[j].images.fixed_height_still.url;
     console.log("this is the still img: " + still);
     giphyDiv.attr("data-still", still);
 
     // adding the data-animate
-    var dataAnimate = response.data[randomIndex].images.fixed_width.url;
+    var dataAnimate = response.data[j].images.fixed_height.url;
+    console.log("this is the video link: " + dataAnimate);
     giphyDiv.attr("data-animate", dataAnimate);
 
 //-----------------------------------------------------------------------------
@@ -56,7 +59,7 @@
 
 
      // Storing the rating data
-     var rating = response.data[randomIndex].rating;
+     var rating = response.data[j].rating;
 
      // Creating an element to have the rating displayed
      var pRating = $("<p>").text("This " + search + " has a (" + rating + ") rating");
@@ -66,11 +69,11 @@
 
      
 
-
+    }
    // end of ajax function
    });
    // end of for loop
-   }
+  
    // end of displayGiphyInfo function
  }
 
@@ -120,19 +123,19 @@
  //-----------------------------------------------
 
 
-  $(".giphy").on("click",  function() {
+  $(document).on("click", ".giphy", function() {
 
    var state = $(this).attr('data-state');
 
    if(state === "still") {
      var animate = $(this).attr("data-animate");
-     $(this).attr("src", animate);
+     $(this).find("img").attr("src", animate);
      $(this).attr("data-state", "animate");
    }
   
    if(state === "animate") {
      var animate2 = $(this).attr("data-still");
-     $(this).attr("src", animate2);
+     $(this).find("img").attr("src", animate2);
      $(this).attr("data-state", "still");
    }
 

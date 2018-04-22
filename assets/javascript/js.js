@@ -10,6 +10,7 @@
 
    // make a for loop to display 10 result searches each time the button is clicked.
    
+   
 
 
 
@@ -84,6 +85,10 @@
    // (this is necessary otherwise you will have repeat buttons)
    $("#buttons-view").empty();
 
+   
+  
+
+
    // Looping through the array of predefined search results
    for (var i = 0; i < giphys.length; i++) {
 
@@ -111,7 +116,12 @@
    giphys.push(giphy);
    console.log("this is the search array " + giphys);
    // Calling renderButtons which handles the processing of our search array
-   renderButtons();
+  
+     renderButtons();
+
+    // Deleting anything in the search box
+    $("#giphy-input").val('');
+
  });
 
  // Adding a click event listener to all elements with a class of "giphy-btn"

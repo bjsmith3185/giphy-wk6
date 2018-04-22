@@ -35,10 +35,13 @@
       // displayMovieInfo function re-renders the HTML to display the appropriate content
       function displayGiphyInfo() {
 
-        var search = $(this).attr("data-name");
+        var search = $(this).attr("data-name"); // this search would be for "dogs"
+        //below is the complete link with dogs hard written into the code
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=dogs&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5"
 
-        //var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5";
+        // this is the same code above but had the word "dogs" removed and the variable "search" with a + on each side.
+        // this link and the one above are the same but the one below used the variable to search which can be changed easily
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=5";
 
         // Creating an AJAX call for the specific movie button being clicked
         $.ajax({

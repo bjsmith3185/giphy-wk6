@@ -4,6 +4,8 @@
  // displayGiphyInfo function re-renders the HTML to display the appropriate content
  function displayGiphyInfo() {
 
+  
+
    var search = $(this).attr("data-name");
    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=xl2g2fBoLlaf4I46IWkUA9yZES0KiLUt&limit=10";
 
@@ -55,7 +57,10 @@
     giphyDiv.attr("data-animate", dataAnimate);
 
 //-----------------------------------------------------------------------------
-     // Putting the entire search above the previous searches
+     // Putting the entire search above the previous searches// clears the previous search giphys
+
+
+
      $("#giphy-view").prepend(giphyDiv);
 
 
@@ -83,7 +88,8 @@
 
    // Deleting anything in the buttons-view div
    // (this is necessary otherwise you will have repeat buttons)
-   $("#buttons-view").empty();
+   
+   $("#giphy-view").empty();
 
    
   
@@ -109,6 +115,10 @@
  // This function handles events where a movie button is clicked
  $("#add-giphy").on("click", function(event) {
    event.preventDefault();
+
+   
+
+
    // This line grabs the input from the textbox
    var giphy = $("#giphy-input").val().trim();
 
@@ -150,3 +160,10 @@
    }
 
  });
+
+
+
+
+ // cant figure out where to put this
+ //   $("#buttons-view").empty();
+ // 
